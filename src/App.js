@@ -1,24 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from './Layout/Layout';
+import Home from './Pages/Home/Home';
+import { useEffect, useState } from 'react';
+import { getAllShows } from './services/api';
+import ShowView from './Pages/ShowView/ShowView';
 
 function App() {
+  const [shows, setShows] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const showsData = await getAllShows();
+        setShows(showsData);
+        console.log(showsData)
+      } catch (error) {
+        console.log(error)
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home shows={shows} />} />
+            <Route path='/show/:showId' element={<ShowView shows={shows} />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
