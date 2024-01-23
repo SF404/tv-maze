@@ -9,7 +9,7 @@ const Home = ({ shows }) => {
   return (
     <Box w={'full'}>
       <ShowCarousel shows={shows} />
-      <SimpleGrid columns={[1, 2, 3, 4, 5]} w={{ base: 'full', md: '80%' }} mx={'auto'} p={[4, 8]} gap={8}>
+      <SimpleGrid columns={[ 2, 3, 4, 5]} w={{ base: 'full', md: '80%' }} mx={'auto'} p={[4, 8]} gap={8}>
         {
           shows.map((item, index) =>
             <Link to={`/show/${item.show.id}`}>
