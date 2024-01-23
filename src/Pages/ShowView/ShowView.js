@@ -17,7 +17,7 @@ const ShowView = ({ shows }) => {
         <>
             <Box w={{ base: 'full', md: '80%' }} mx={'auto'} p={6} minH={'100vh'}>
                 <Box w={'full'} height={'full'} display={'flex'} alignItems={'center'}>
-                    <Flex gap={6}>
+                    <Flex gap={6} flexDirection={{base:'column', md:'row'}} w={{base:'full', md:'fit-content'}}>
                         {selectedShow.show.image ? (
                             <Image src={selectedShow.show.image?.medium} rounded={10} w={'full'} loading='lazy'></Image>
                         ) : (
